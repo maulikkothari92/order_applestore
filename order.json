@@ -1,0 +1,39 @@
+{
+  "retailer_credentials": {
+      "email": "example@gmail.com",
+      "password": "password"
+  },
+  "products": {
+    "phone": "6+",
+    "color": "gold",
+    "storage": "64gb"
+  },
+  "max_price": "300",
+  "shipping_address": {
+    "first_name": "Doug",
+    "last_name": "Feigelson",
+    "address": "1188 Mission Street Apt 1609",
+    "zip_code": "94103",
+    "city": "San Francisco",
+    "state": "CA",
+    "country": "US",
+    "phone": "5136006163"
+  },
+  "payment_method": {
+      "number": "5555555555554444",
+      "name_on_card": "Douglas Feigelson",
+      "expiration_month": "01",
+      "expiration_year": "2016",
+      "security_code": "207"
+  },
+  "billing_address": {
+    "first_name": "Douglas",
+    "last_name": "Feigelson",
+    "address": "111 Ilima way",
+    "zip_code": "94306",
+    "city": "Palo Alto",
+    "state": "CA",
+    "country": "US",
+    "phone": "5136006163"
+  }
+}
