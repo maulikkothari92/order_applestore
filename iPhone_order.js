@@ -148,14 +148,14 @@ start_spooky = function (order, callback){
                 document.getElementById("checkout-now").click()
             });
 
-            spooky.then(function(){
-                this.capture('captures/[Add to Cart] After clicking checkout button.png');
-            });
-
 
             spooky.then(function(){
                this.wait(2000);
              });
+
+            spooky.then(function(){
+                this.capture('captures/[Add to Cart] After clicking checkout button.png');
+            });
 
 
             spooky.thenEvaluate(function(){
@@ -163,12 +163,158 @@ start_spooky = function (order, callback){
             });
 
             spooky.then(function(){
-               this.wait(1000);
+               this.wait(2000);
              });
 
             spooky.then(function(){
                 this.capture('captures/[Add to Cart] After clicking Continue as Guest.png');
             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("cart-continue-button").click()
+            });
+
+            spooky.then(function(){
+               this.wait(2000);
+             });
+
+            spooky.then(function(){
+                this.capture('captures/[Add to Cart] After clicking Continue button.png');
+            });
+
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("shipping-user-firstName").value = "Maulik"
+                document.getElementById("shipping-user-lastName").value = "Kothari"
+            });
+
+            spooky.then(function(){
+               this.wait(2000);
+             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("shipping-user-daytimePhoneAreaCode").value = "812"
+                document.getElementById("shipping-user-daytimePhone").value = "3251316"
+            });
+
+             spooky.thenEvaluate(function(){
+                document.getElementById("shipping-user-postalCode").value = "47408"
+            });
+
+
+             spooky.thenEvaluate(function(){
+                document.getElementById("shipping-user-street").value = "2667 E. 7th Street"
+                document.getElementById("shipping-user-street2").value = "Apt E"
+                //document.getElementById("shipping-user-postalCode").value = "47408"
+            });
+ 
+
+
+             spooky.thenEvaluate(function(){
+                document.getElementById("shipping-continue-button").click()
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("shipping-continue-button").click()
+            });
+
+            spooky.then(function(){
+               this.wait(2000);
+             });
+
+            spooky.then(function(){
+                this.capture('captures/[Add to Cart] After filling address.png');
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-user-copy-from-shipping-button").click()
+            });
+
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-method-cc0-cardNumber").value = "6011005071946985"
+            });
+
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-method-cc0-expirationMonth").value = "01"
+            });
+            
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-method-cc0-expirationYear").value = "2017"
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-method-cc0-security-code").value = "800"
+            });
+
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-user-address-emailAddress").value = "maulikkothari92@gmail.com"
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+            spooky.then(function(){
+                this.capture('captures/[Add to Cart] Before payment.png');
+            });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-continue-button").click()
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-credit-method-cc0-security-code").value = "800"
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-continue-button").click()
+            });
+
+            spooky.then(function(){
+               this.wait(1000);
+             });
+
+            spooky.thenEvaluate(function(){
+                document.getElementById("payment-continue-button").click()
+            });
+
+            spooky.then(function(){
+               this.wait(3000);
+             });
+
+            spooky.then(function(){
+                this.capture('captures/[Add to Cart] Before payment.png');
+            });
+
 
 
 
