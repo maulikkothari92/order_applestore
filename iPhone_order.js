@@ -30,21 +30,18 @@ start_spooky = function (order, callback){
             var phone = order["products"]["phone"];
             var color = order["products"]["color"];
             var storage = order["products"]["storage"];
+            var max_price = order["max_price"];
             
 
             spooky.start(IPHONE_ORDER);
 
             spooky.then(function(){
-                this.wait(1000);
+                this.waitForSelector("#Item15_5inch");
             });
 
             // screenshots for debugging
             spooky.then(function(){
                 this.capture('captures/[Apple Store Page] On Apple Store Page.png');
-            });
-
-            spooky.then(function(){
-                this.wait(1000);
             });
 
             spooky.then(function(){
@@ -76,6 +73,10 @@ start_spooky = function (order, callback){
                 this.capture('captures/[Apple Store Page] Selected the iPhone model.png');
             });
 
+            spooky.then(function(){
+                this.waitForSelector("#Item2silver");
+            });
+
             spooky.thenEvaluate(function(color){
                 jQuery('input[value ='+color+']').click();
             },{
@@ -85,6 +86,11 @@ start_spooky = function (order, callback){
             spooky.then(function(){
                 this.capture('captures/[Apple Store Page] Selected the color.png');
             });
+
+            spooky.then(function(){
+                this.waitForSelector("#Item4TMOBILEUS");
+            });
+
 
             spooky.thenEvaluate(function(){
                 jQuery('input[value = "TMOBILE/US"]').click();
@@ -105,10 +111,6 @@ start_spooky = function (order, callback){
             });
 
             spooky.then(function(){
-                this.wait(1000);
-            });
-
-            spooky.then(function(){
                this.waitForSelector('button[value = "proceed"]');
              });
 
@@ -117,37 +119,48 @@ start_spooky = function (order, callback){
             });
 
             spooky.then(function(){
-                this.wait(2000);
-            });
+               this.waitForSelector('button[value = "add-to-cart"]');
+             });
 
             spooky.then(function(){
                 this.capture('captures/[Add to Cart] After selecting the iPhone.png');
             });
-
-            spooky.then(function(){
-               this.waitForSelector('button[value = "add-to-cart"]');
-             });
 
             spooky.thenEvaluate(function(){
                 jQuery('button[value = "add-to-cart"]').click();
             });
 
             spooky.then(function(){
-                this.wait(2000);
-            });
+               this.waitForSelector('#checkout-now');
+             });
             
             spooky.then(function(){
                 this.capture('captures/[Add to Cart] After clicking add to cart button.png');
             });
 
-            spooky.then(function(){
-               this.waitForSelector('#checkout-now');
-             });
+            spooky.then([{
+                  max_price: max_price
+                },function(){
+                var price_on_page = this.evaluate(function() {      
+                  return document.getElementById("cart-summary-order-total-value").innerHTML
+                });
+                price_on_page = price_on_page.replace(/\$/g, '')
+                price_on_page = parseInt(price_on_page);
+                max_price = parseInt(max_price);
 
-            spooky.thenEvaluate(function(){
-                document.getElementById("checkout-now").click()
-            });
+                if(price_on_page > max_price)
+                {
+                    this.emit('error', 'max_price_exceeded');
+                }
 
+                this.emit('message', "Trying to click the CONFIRM button");   
+
+                this.evaluate(function() {      
+                    document.getElementById("checkout-now").click()
+                    console.log('Clicking the CONFIRM button');
+                });
+                
+            }]);
 
             spooky.then(function(){
                this.wait(2000);
@@ -268,7 +281,7 @@ start_spooky = function (order, callback){
 
 
             spooky.thenEvaluate(function(){
-                document.getElementById("payment-credit-user-address-emailAddress").value = "maulikkothari92@gmail.com"
+                document.getElementById("payment-credit-user-address-emailAddress").value = "mkothari@indiana.edu"
             });
 
             spooky.then(function(){
