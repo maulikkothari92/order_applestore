@@ -53,7 +53,10 @@ start_spooky = function (order, callback){
             var credit_card_number = order["payment_method"]["number"];
             var credit_card_year = order["payment_method"]["expiration_year"];
             var credit_card_cvv = order["payment_method"]["security_code"];
+            var email = order["email"];
+
             
+
             color = color.toLowerCase();
             color = color.replace(/\s+/g,'');
 
