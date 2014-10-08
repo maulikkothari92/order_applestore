@@ -54,8 +54,36 @@ start_spooky = function (order, callback){
             var credit_card_year = order["payment_method"]["expiration_year"];
             var credit_card_cvv = order["payment_method"]["security_code"];
             
+            color = color.toLowerCase();
+            color = color.replace(/\s+/g,'');
+
+            storage = storage.toLowerCase();
+            storage = storage.replace(/\s+/g,'');
+
+
 
             spooky.start(IPHONE_ORDER);
+
+            spooky.then([{
+                  color: color,
+                  storage: storage
+                },function(){
+
+                
+               
+                if(color != 'gold' && color != 'space-gray' && color !='silver')
+                {
+                    this.emit('message','Color is '+color);    
+                    this.emit('error', 'invalid_color');
+                }
+
+                if(storage != '16gb' && storage != '64gb' && storage !='128gb')
+                {
+                    this.emit('error', 'invalid_storage');
+                }
+
+                
+            }]);
 
             spooky.then(function(){
                 this.waitForSelector("#Item15_5inch");
@@ -81,8 +109,7 @@ start_spooky = function (order, callback){
             {
                 iPhonemodel = "4_7inch"
             }
-
-            
+      
             
             spooky.thenEvaluate(function(iPhonemodel){
                 jQuery('input[value ='+iPhonemodel+']').click();
@@ -101,6 +128,7 @@ start_spooky = function (order, callback){
 
             spooky.thenEvaluate(function(color){
                 jQuery('input[value ='+color+']').click();
+                
             },{
                 color: color
             });
@@ -987,6 +1015,8 @@ start_spooky = function (order, callback){
         var errors = {
             'internal_error': 'The retailer you requested is experiencing outages. Please try again or contact support@zinc.io if this error persists.',
             'invalid_request': 'Validation failed on the request.',
+            'invalid_color': 'Color can be gold or space-gray or silver .',
+            'invalid_storage': 'Invalid storage size. iPhone 6 comes in 3 storage sizes 16gb or 64gb or 128gb',
             'invalid_quantity' : "The quantity for one of the products does not match the one available on the retailer store." ,
             'invalid_size' : "The size for one of the products does not match the one available on the retailer store. The size may be sold out or invalid.",
             'invalid_product' : "One of the products does not match the one available on the retailer store.",
